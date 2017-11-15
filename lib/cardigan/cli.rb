@@ -1,12 +1,12 @@
 require_relative './jira/client'
 require_relative './jira/sprint'
+require_relative './document'
 
 module Cardigan
   class CLI
     def run
-      sprint.each do |issue|
-        puts "(#{issue.story_points || '?'}) #{issue.key} #{issue.summary}"
-      end
+      document.generate(output_filename)
+      `open #{output_filename}`
     end
 
     private
@@ -15,15 +15,20 @@ module Cardigan
       return @options if @options
 
       @options = Slop.parse do |o|
-        o.string '-j', '--jira', 'JIRA instance'
+        o.string '-j', '--jira',     'JIRA instance'
         o.string '-u', '--username', 'JIRA username'
         o.string '-p', '--password', 'JIRA password'
-        o.string '-s', '--sprint', 'sprint name or ID'
+        o.string '-s', '--sprint',   'sprint name or ID'
+        o.string '-t', '--template', 'name of template'
         o.on '-h', '--help' do
           puts o
           exit
         end
       end
+    end
+
+    def document
+      @document = Document.new(sprint.issues, template: template_name)
     end
 
     def sprint
@@ -78,6 +83,14 @@ module Cardigan
         :JIRA_SPRINT,
         'Please provide a sprint name with -s or JIRA_SPRINT'
       )
+    end
+
+    def template_name
+      options[:template] || 'stranger_things'
+    end
+
+    def output_filename
+      sprint_name.downcase.gsub(/[^\w]+/, '-') + '.pdf'
     end
   end
 end

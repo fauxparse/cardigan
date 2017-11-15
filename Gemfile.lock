@@ -11,6 +11,7 @@ GEM
     dotenv (2.2.1)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
+    inflecto (0.0.2)
     jira-ruby (1.4.3)
       activesupport
       multipart-post
@@ -37,6 +38,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
+  inflecto
   jira-ruby
   prawn
   pry

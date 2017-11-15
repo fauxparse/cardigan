@@ -5,6 +5,8 @@ module Cardigan
     class Sprint
       include Enumerable
 
+      attr_reader :name
+
       def initialize(name, client:)
         @name = name
         @client = client
@@ -15,7 +17,7 @@ module Cardigan
           client
           .Issue
           .jql("Sprint=#{quote(name)} AND issuetype=Story")
-          .map { |issue| Issue.new(issue, client: client) }
+          .map { |issue| Issue.new(issue, client: client, sprint: self) }
       end
 
       def each
@@ -28,7 +30,7 @@ module Cardigan
 
       private
 
-      attr_reader :name, :client
+      attr_reader :client
 
       def quote(name)
         if name =~ /\A\d+\z/

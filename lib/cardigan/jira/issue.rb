@@ -1,13 +1,24 @@
 module Cardigan
   module JIRA
     class Issue
-      def initialize(issue, client:)
+      attr_reader :sprint
+
+      def initialize(issue, client:, sprint:)
         @issue = issue
         @jira = client
+        @sprint = sprint
       end
 
       def story_points
         @story_points ||= issue.fields[jira.fields['Story Points'].id]&.to_i
+      end
+
+      def pleasant_lawyer
+        'gross elderly beggar'
+      end
+
+      def team
+        issue.fields[jira.fields['Team'].id]['value']
       end
 
       delegate :key, :summary, to: :issue
