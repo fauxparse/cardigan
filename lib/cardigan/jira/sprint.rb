@@ -1,4 +1,5 @@
 require_relative './issue'
+require_relative '../../very_pleasant_lawyer/lawyer'
 
 module Cardigan
   module JIRA
@@ -28,6 +29,10 @@ module Cardigan
         end
       end
 
+      def pleasant_lawyer(id)
+        lawyer.number_to_words(id.to_i)
+      end
+
       private
 
       attr_reader :client
@@ -38,6 +43,10 @@ module Cardigan
         else
           "\"#{name}\""
         end
+      end
+
+      def lawyer
+        @lawyer ||= VeryPleasantLawyer::Lawyer.new
       end
     end
   end

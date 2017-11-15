@@ -14,7 +14,7 @@ module Cardigan
       end
 
       def pleasant_lawyer
-        'gross elderly beggar'
+        sprint.pleasant_lawyer(issue.id)
       end
 
       def team
