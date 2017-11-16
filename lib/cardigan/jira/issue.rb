@@ -21,6 +21,10 @@ module Cardigan
         issue.fields[jira.fields['Team'].id]['value']
       end
 
+      def url
+        issue.self.sub(%r{/rest.*}, "/browse/#{key}")
+      end
+
       delegate :key, :summary, to: :issue
 
       private

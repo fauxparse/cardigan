@@ -92,7 +92,7 @@ module Cardigan
 
     def with_bounding_box(view, column, row, &block)
       left, top = origin(view, column, row)
-      view.bounding_box([left, top], { width: card_width, height: card_height }) do
+      view.bounding_box([left, top], width: card_width, height: card_height) do
         yield top, left + card_width, top - card_height, left
       end
     end
