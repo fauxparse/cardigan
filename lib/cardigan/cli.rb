@@ -32,7 +32,7 @@ module Cardigan
     end
 
     def sprint
-      @sprint ||= Cardigan::JIRA::Sprint.new(sprint_name, client: client)
+      @sprint ||= Cardigan::JIRA::Sprint.new(sprint_name, client: client, issues: options.arguments)
     end
 
     def client

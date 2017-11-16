@@ -8,16 +8,14 @@ module Cardigan
 
       attr_reader :name
 
-      def initialize(name, client:)
+      def initialize(name, client:, issues: [])
         @name = name
         @client = client
+        @keys = issues
       end
 
       def issues
-        @issues ||=
-          client
-          .Issue
-          .jql("Sprint=#{quote(name)} AND issuetype=Story")
+        @issues ||= client.Issue.jql(jql)
           .map { |issue| Issue.new(issue, client: client, sprint: self) }
       end
 
@@ -35,7 +33,7 @@ module Cardigan
 
       private
 
-      attr_reader :client
+      attr_reader :client, :keys
 
       def quote(name)
         if name =~ /\A\d+\z/
@@ -47,6 +45,12 @@ module Cardigan
 
       def lawyer
         @lawyer ||= VeryPleasantLawyer::Lawyer.new
+      end
+
+      def jql
+        jql = "Sprint=#{quote(name)} AND issuetype=Story"
+        jql << " AND Key IN (#{keys.map { |k| "\"#{k}\"" }.join(', ')})" if keys.any?
+        jql
       end
     end
   end
