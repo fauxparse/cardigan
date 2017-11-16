@@ -63,7 +63,7 @@ module Cardigan
         view.fill_ellipse [x + 24.pt, y - 24.pt], 24.pt
         view.fill_color *WHITE
         view.text_box(
-          story_points.to_s,
+          story_points&.to_s || '?',
           at: [x, y],
           width: 48.pt,
           height: 44.pt,
@@ -78,9 +78,9 @@ module Cardigan
       def fonts
         super.merge(
           'Rubik' => {
-            normal: font_filename('Rubik-Light'),
-            bold: font_filename('Rubik-Medium'),
-            black: font_filename('Rubik-Black')
+            normal: google_font('rubik', 'Rubik-Light'),
+            bold: google_font('rubik', 'Rubik-Medium'),
+            black: google_font('rubik', 'Rubik-Black')
           }
         )
       end

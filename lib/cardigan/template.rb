@@ -1,4 +1,5 @@
 require 'prawn/measurement_extensions'
+require 'open-uri'
 
 module Cardigan
   class Template
@@ -101,8 +102,10 @@ module Cardigan
       {}
     end
 
-    def font_filename(name)
-      "#{File.dirname(__FILE__)}/../../fonts/#{name}.ttf"
+    def google_font(family, name)
+      url = "https://github.com/google/fonts/raw/master/ofl/#{family}/#{name}.ttf"
+      puts "Loading font #{name} from #{url}"
+      open(url) { |f| StringIO.new(f.read) }
     end
 
     def cmyk(color, text)

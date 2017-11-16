@@ -52,9 +52,9 @@ module Cardigan
       def fonts
         super.merge(
           'Rubik' => {
-            normal: font_filename('Rubik-Light'),
-            bold: font_filename('Rubik-Medium'),
-            black: font_filename('Rubik-Black')
+            normal: google_font('rubik', 'Rubik-Light'),
+            bold: google_font('rubik', 'Rubik-Medium'),
+            black: google_font('rubik', 'Rubik-Black')
           }
         )
       end

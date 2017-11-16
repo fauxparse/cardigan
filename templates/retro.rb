@@ -85,15 +85,10 @@ module Cardigan
       def fonts
         super.merge(
           'VT323' => {
-            normal: font_filename('VT323-Regular')
+            normal: google_font('vt323', 'VT323-Regular')
           },
           'PressStart' => {
-            normal: font_filename('PressStart2P-Regular')
-          },
-          'Rubik' => {
-            normal: font_filename('Rubik-Light'),
-            bold: font_filename('Rubik-Medium'),
-            black: font_filename('Rubik-Black')
+            normal: google_font('pressstart2p', 'PressStart2P-Regular')
           }
         )
       end
