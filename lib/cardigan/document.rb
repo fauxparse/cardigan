@@ -34,7 +34,7 @@ module Cardigan
 
     def crop_mark(x, y)
       stroke do
-        self.line_width = 0.5
+        self.line_width = 0.25
         horizontal_line x - 2.5.mm, x + 2.5.mm, at: y
         vertical_line y - 2.5.mm, y + 2.5.mm, at: x
       end
