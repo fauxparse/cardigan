@@ -25,6 +25,10 @@ module Cardigan
         issue.self.sub(%r{/rest.*}, "/browse/#{key}")
       end
 
+      def id
+        issue.id&.to_i
+      end
+
       delegate :key, :summary, to: :issue
 
       private
