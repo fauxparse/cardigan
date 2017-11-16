@@ -3,7 +3,6 @@ module Cardigan
     class Luchador < Template
       def prepare(view)
         super
-
         view.font 'Rubik'
       end
 
@@ -15,13 +14,12 @@ module Cardigan
             view.fill_color color('teal')
             view.text_box(
               issue.story_points&.to_s || '?',
-              at: [0, view.bounds.top - 64.pt],
+              at: [0, view.bounds.top - 65.pt],
               width: 64.pt,
               height: 64.pt,
               align: :center,
               size: 24.pt,
-              style: :black,
-              leading: 0
+              style: :black
             )
 
             view.margin(0, 0, 0, 76.pt) do

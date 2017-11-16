@@ -73,6 +73,8 @@ module Cardigan
     private
 
     def draw_crop_marks(view)
+      view.stroke_color *BLACK
+
       rows.times do |row|
         columns.times do |column|
           with_bounding_box(view, column, row) do
@@ -102,9 +104,9 @@ module Cardigan
       {}
     end
 
-    def google_font(family, name)
-      url = "https://github.com/google/fonts/raw/master/ofl/#{family}/#{name}.ttf"
-      puts "Loading font #{name} from #{url}"
+    def google_font(family, name, license: 'ofl')
+      url = "https://github.com/google/fonts/raw/master/#{license}/#{family}/#{name}.ttf"
+      puts "Loading font #{name} from #{url}..."
       open(url) { |f| StringIO.new(f.read) }
     end
 
