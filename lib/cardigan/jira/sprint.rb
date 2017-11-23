@@ -48,7 +48,7 @@ module Cardigan
       end
 
       def jql
-        jql = "Sprint=#{quote(name)} AND issuetype=Story"
+        jql = "Sprint=#{quote(name)} AND issuetype IN (\"Story\", \"Bug\")"
         jql << " AND Key IN (#{keys.map { |k| "\"#{k}\"" }.join(', ')})" if keys.any?
         jql
       end

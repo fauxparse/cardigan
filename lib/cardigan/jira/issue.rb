@@ -29,6 +29,10 @@ module Cardigan
         issue.id&.to_i
       end
 
+      def type
+        issue.fields['issuetype']['name'].underscore.to_sym
+      end
+
       delegate :key, :summary, to: :issue
 
       private

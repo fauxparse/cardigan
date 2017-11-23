@@ -114,5 +114,9 @@ module Cardigan
       c, m, y, k = color
       "<color c='#{c}' m='#{m}' y='#{y}' k='#{k}'>#{text}</color>"
     end
+
+    def rgb(color, text)
+      "<color rgb='#{color}'>#{text}</color>"
+    end
   end
 end
